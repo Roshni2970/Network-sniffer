@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Traffic Analyzer</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <meta http-equiv="refresh" content="5">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Network Traffic Analyzer Dashboard</h1>
+
+        <div class="cards">
+
+            <div class="card">
+                <h2>Total Packets</h2>
+                <p>{{ stats.total }}</p>
+            </div>
+
+            <div class="card">
+                <h2>TCP</h2>
+                <p>{{ stats.tcp }}</p>
+            </div>
+
+            <div class="card">
+                <h2>UDP</h2>
+                <p>{{ stats.udp }}</p>
+            </div>
+
+            <div class="card">
+                <h2>ICMP</h2>
+                <p>{{ stats.icmp }}</p>
+            </div>
+
+            <div class="card">
+                <h2>ARP</h2>
+                <p>{{ stats.arp }}</p>
+            </div>
+
+        </div>
+
+        <h2>Recent Packets</h2>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Source IP</th>
+                    <th>Destination IP</th>
+                    <th>Protocol</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for packet in packets %}
+
+                <tr>
+                    <td>{{ packet.id }}</td>
+                    <td>{{ packet.src }}</td>
+                    <td>{{ packet.dst }}</td>
+                    <td>{{ packet.protocol }}</td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</body>
+</html>
